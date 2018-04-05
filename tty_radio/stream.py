@@ -92,14 +92,17 @@ class Stream(object):
 def mpg_running():
     # searching for mpg123 reveals an orphaned process in parens (mpg123)
     # so search for 'mpg123 '
+    print("Executing mpg_running")
     try:
-        grep = check_output("ps | grep -v grep | grep 'mpg123 '", shell=True)
+        grep = check_output("ps x | grep -v grep | grep 'mpg123 '", shell=True)
     except CalledProcessError:
+        print("Called Process ERROR!!!!")
         return False
     grep = grep.decode('ascii').strip()
     if len(grep) > 1:
-        # print('%s' % grep)
+        print('%s' % grep)
         return True
+    print("mpg_running failed")
     return False
 
 
